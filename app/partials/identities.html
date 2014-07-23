@@ -1,0 +1,25 @@
+<div class="large-12 columns">
+  <input type="text" ng-model="search" placeholder="Search PasMan">
+  <table style="width: 100%">
+    <thead>
+      <tr>
+        <th>project</th>
+        <th>tags</th>
+        <th>user</th>
+        <th>pass</th>
+        <th>server/path</th>
+        <th>memo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="identity in identities | filter: search">
+        <td>{{identity.project.name}}</td>
+        <td><span class="round secondary label" ng-repeat="tag in identity.tags" style="background-color: {{tag.color.bg}}; color: {{tag.color.fg}}">{{tag.name}}</span></td>
+        <td><span class="round regular label pbcopy" pbcopy="{{identity.user}}">{{identity.user}}</span></td>
+        <td><span class="round alert label pbcopy" pbcopy="{{identity.pass}}">{{identity.pass}}</span></td>
+        <td><span class="radius secondary label pbcopy" pbcopy="{{identity.server}}">{{identity.server}}</span> <span class="radius secondary label pbcopy" pbcopy="{{identity.path}}">{{identity.path}}</span></td>
+        <td>{{identity.memo}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

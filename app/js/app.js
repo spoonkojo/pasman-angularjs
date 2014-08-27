@@ -7,7 +7,8 @@ angular.module('myApp', [
   'myApp.filters',
   'myApp.services',
   'myApp.directives',
-  'myApp.controllers'
+  'myApp.controllers',
+  'selectize-ng'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/identities', {templateUrl: 'partials/identities.html', controller: 'IdentitiesCtrl'});

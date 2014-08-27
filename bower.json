@@ -13,6 +13,8 @@
     "html5-boilerplate": "~4.3.0",
     "foundation": "~5.3.1",
     "zeroclipboard": "~2.1.5",
-    "toastr": "~2.0.3"
+    "toastr": "~2.0.3",
+    "fontawesome": "~4.1.0",
+    "selectize-ng": "~0.1.0"
   }
 }

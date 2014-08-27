@@ -29,6 +29,8 @@ angular.module('myApp.directives', []).
   directive('pbcopy', function() {
     return {
       restrict: 'A',
+      transclude: true,
+      template: '<i class="fa fa-copy"></i> <span ng-transclude></span>',
       link: function(scope, element, attrs) {
         var client;
 

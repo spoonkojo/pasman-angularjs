@@ -1,25 +1,98 @@
-<div class="large-12 columns">
-  <input type="text" ng-model="search" placeholder="Search PasMan">
-  <table style="width: 100%">
-    <thead>
-      <tr>
-        <th>project</th>
-        <th>tags</th>
-        <th>user</th>
-        <th>pass</th>
-        <th>server/path</th>
-        <th>memo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="identity in identities | filter: search">
-        <td>{{identity.project.name}}</td>
-        <td><span class="round secondary label" ng-repeat="tag in identity.tags" style="background-color: {{tag.color.bg}}; color: {{tag.color.fg}}">{{tag.name}}</span></td>
-        <td><span class="round regular label pbcopy" pbcopy="{{identity.user}}">{{identity.user}}</span></td>
-        <td><span class="round alert label pbcopy" pbcopy="{{identity.pass}}">{{identity.pass}}</span></td>
-        <td><span class="radius secondary label pbcopy" pbcopy="{{identity.server}}">{{identity.server}}</span> <span class="radius secondary label pbcopy" pbcopy="{{identity.path}}">{{identity.path}}</span></td>
-        <td>{{identity.memo}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="row" style="margin-bottom: 14px;">
+  <div class="col-xs-4 col-sm-2 col-md-2">
+    <button class="btn btn-primary btn-sm" ng-click="open()"><i class="fa fa-plus-circle"></i> Add Identity</button>
+  </div>
+
+  <div class="col-xs-8 col-sm-10 col-md-10">
+    <div class="input-group">
+      <input type="text" class="form-control input-sm" ng-model="search" placeholder="Search PasMan">
+      <span class="input-group-addon input-sm"><i class="fa fa-search"></i></span>
+    </div>
+  </div>
 </div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Tags</th>
+          <th>User</th>
+          <th>Pass</th>
+          <th class="hidden-xs">Server/Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="identity in identities | filter: search">
+          <td>
+            {{identity.project.name}}
+            <i ng-show="identity.memo" class="hidden-xs fa fa-info-circle" tooltip-placement="right" tooltip="{{identity.memo}}"></i>
+          </td>
+          <td>
+            <span class="label" ng-repeat="tag in identity.tags" style="background-color: {{tag.color.bg}}; color: {{tag.color.fg}}; margin-right: 4px;">{{tag.name}}</span>
+          </td>
+          <td><span class="label label-info pbcopy" pbcopy="{{identity.user}}">{{identity.user}}</span></td>
+          <td><span class="label label-danger pbcopy" pbcopy="{{identity.pass}}">{{identity.pass}}</span></td>
+          <td class="hidden-xs"><span class="label label-primary pbcopy" pbcopy="{{identity.server}}{{identity.path}}">{{identity.server}}{{identity.path}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script type="text/ng-template" id="addIdentityModal.html">
+  <div class="modal-header">
+    <h4 class="modal-title"><i class="fa fa-key"></i> Add Identity</h4>
+  </div>
+  <div class="modal-body">
+    <form role="form">
+      <div class="form-group">
+        <label for="project">Project</label>
+        <select class="form-control input-sm" id="project">
+          <option>-- Select project --</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="tags">Tags</label>
+        <input type="text" selectize="tagging.options" placeholder="Choose some tags" ng-model="tagging.value" options="tags"/>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control input-sm" id="username" placeholder="Enter username">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-group">
+          <input type="text" class="form-control input-sm" id="password" placeholder="Enter password">
+          <span class="input-group-btn">
+            <button class="btn btn-default btn-sm" type="button">Generate</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="server">Server</label>
+        <input type="text" class="form-control input-sm" id="server" placeholder="http://<domain-name>">
+      </div>
+
+      <div class="form-group">
+        <label for="path">Path</label>
+        <input type="text" class="form-control input-sm" id="path" placeholder="/public_html">
+      </div>
+
+      <div class="form-group">
+        <label for="memo">Memo</label>
+        <textarea class="form-control input-sm" rows="3" id="memo" placeholder="Enter extra info"></textarea>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default btn-sm" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-success btn-sm" ng-click="ok()">Save</button>
+  </div>
+</script>

@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('IdentitiesCtrl', ['$scope', '$http', function($scope, $http) {
+  .controller('IdentitiesCtrl', ['$scope', '$http', '$modal', function($scope, $http, $modal) {
 
     $scope.url = "http://pasman.apiary-mock.com";
     $scope.identities = {};
@@ -17,6 +17,16 @@ angular.module('myApp.controllers', [])
 
     $scope.getIdentities();
 
+    $scope.open = function () {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'addIdentityModal.html',
+        controller: 'AddIdentityModalCtrl',
+        size: 'sm'
+      });
+
+    };
+
   }])
   .controller('ProjectsCtrl', ['$scope', function($scope) {
 
@@ -24,7 +34,7 @@ angular.module('myApp.controllers', [])
   .controller('TagsCtrl', ['$scope', function($scope) {
 
   }])
-  .controller('AddIdentityModalCtrl', ['$scope', '$http', function($scope, $http) {
+  .controller('AddIdentityModalCtrl', ['$scope', '$http', '$modalInstance', function($scope, $http, $modalInstance) {
 
     $scope.tags = [
       { "id": 1, "name": "webadmin" },
@@ -43,5 +53,13 @@ angular.module('myApp.controllers', [])
     };
 
     $scope.tag = $scope.tags[0];
+
+    $scope.ok = function () {
+      $modalInstance.close();
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
 
   }]);
